@@ -22,3 +22,9 @@ XML
 cd /pathfile
 3.2 Run command 
 robot .\officemate.robot
+
+4. Before testing, change Test_Data in the excel file below:
+
+
+5. Search feature test plan
+https://github.com/nuksixnine/HomeTest/blob/main/OfficeMate_Search_Feature_TestPlan1.0.xlsx
