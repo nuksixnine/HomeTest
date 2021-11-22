@@ -1,7 +1,7 @@
 # OfficeMate Search Feature Test
 
 1. Result is here.
-File name: Log.html
+File name: log.html
 
 2. Install Library (pip install)
 SeleniumLibrary
