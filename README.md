@@ -21,4 +21,4 @@ XML
 3.1 Go to project directory 
 cd /pathfile
 3.2 Run command 
-robot .\xxx.robot
+robot .\officemate.robot
