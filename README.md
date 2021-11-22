@@ -24,7 +24,7 @@ cd /pathfile
 robot .\officemate.robot
 
 4. Before testing, change Test_Data in the excel file below:
-
+https://github.com/nuksixnine/HomeTest/blob/main/Data/MainframeConfiguration.xlsx
 
 5. Search feature test plan
 https://github.com/nuksixnine/HomeTest/blob/main/OfficeMate_Search_Feature_TestPlan1.0.xlsx
