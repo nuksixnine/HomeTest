@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0 (Python 3.9.2 on win32)" generated="20211122 00:49:07.119" rpa="false" schemaversion="2">
+<suite id="s1" name="Officemate" source="C:\superapi-robot copy\test\officeMate\officemate.robot">
+<kw name="MainframeConfiguration" library="Keywords" type="SETUP">
+<kw name="CHECK NAME" library="Keywords">
+<var>${COLUMN_DATA_EXCEL}</var>
+<kw name="Open Excel Document" library="ExcelLibrary">
+<arg>filename=${excelLib}</arg>
+<arg>doc_id=MainCofiguration</arg>
+<doc>Opens xlsx document file.</doc>
+<status status="PASS" starttime="20211122 00:49:07.982" endtime="20211122 00:49:07.989"/>
+</kw>
+<kw name="Get List Sheet Names" library="ExcelLibrary">
+<var>${getSheetExcel}</var>
+<doc>Returns a list of sheet names in the current document.</doc>
+<msg timestamp="20211122 00:49:07.989" level="INFO">${getSheetExcel} = ['MainCofiguration']</msg>
+<status status="PASS" starttime="20211122 00:49:07.989" endtime="20211122 00:49:07.990"/>
+</kw>
+<kw name="Count Row" library="ExcelLibrary">
+<var>${excelRow}</var>
+<arg>@{getSheetExcel}</arg>
+<msg timestamp="20211122 00:49:07.990" level="INFO">${excelRow} = 8</msg>
+<status status="PASS" starttime="20211122 00:49:07.990" endtime="20211122 00:49:07.990"/>
+</kw>
+<kw name="Count Column" library="ExcelLibrary">
+<var>${excelColumn}</var>
+<arg>@{getSheetExcel}</arg>
+<msg timestamp="20211122 00:49:07.990" level="INFO">${excelColumn} = 2</msg>
+<status status="PASS" starttime="20211122 00:49:07.990" endtime="20211122 00:49:07.991"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${Indexrow}</var>
+<value>2</value>
+<value>${excelRow}+1</value>
+<iter>
+<var name="${Indexrow}">2</var>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${cellRow}</var>
+<arg>row_num=${Indexrow}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20211122 00:49:07.991" level="INFO">${cellRow} = ['Officemate', 'C:\\superapi-robot copy\\test\\officeMate\\Data\\search.xlsx']</msg>
+<status status="PASS" starttime="20211122 00:49:07.991" endtime="20211122 00:49:07.991"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${cellRow}[0]' == '${suiteName}'</arg>
+<arg>Return From Keyword</arg>
+<arg>${cellRow}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Return From Keyword" library="BuiltIn">
+<arg>${cellRow}</arg>
+<doc>Returns from the enclosing user keyword.</doc>
+<msg timestamp="20211122 00:49:07.992" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20211122 00:49:07.992" endtime="20211122 00:49:07.992"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:07.992" endtime="20211122 00:49:07.992"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:07.991" endtime="20211122 00:49:07.992"/>
+</iter>
+<status status="PASS" starttime="20211122 00:49:07.991" endtime="20211122 00:49:07.992"/>
+</for>
+<msg timestamp="20211122 00:49:07.992" level="INFO">${COLUMN_DATA_EXCEL} = ['Officemate', 'C:\\superapi-robot copy\\test\\officeMate\\Data\\search.xlsx']</msg>
+<status status="PASS" starttime="20211122 00:49:07.981" endtime="20211122 00:49:07.993"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${COLUMN_DATA_EXCEL}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:07.993" level="INFO">${COLUMN_DATA_EXCEL} = ['Officemate', 'C:\\superapi-robot copy\\test\\officeMate\\Data\\search.xlsx']</msg>
+<status status="PASS" starttime="20211122 00:49:07.993" endtime="20211122 00:49:07.993"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nTESTCell=${COLUMN_DATA_EXCEL}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211122 00:49:07.993" endtime="20211122 00:49:07.994"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:07.981" endtime="20211122 00:49:07.994"/>
+</kw>
+<test id="s1-t1" name="1. Get response officeMate">
+<kw name="OPEN EXCEL XPATH" library="Keywords" type="SETUP">
+<kw name="Load Workbook" library="openpyxl">
+<var>${wb}</var>
+<arg>${excelXPATH}</arg>
+<doc>Open the given filename and return the workbook</doc>
+<msg timestamp="20211122 00:49:08.001" level="INFO">${wb} = &lt;openpyxl.workbook.workbook.Workbook object at 0x000001F5D94F63D0&gt;</msg>
+<status status="PASS" starttime="20211122 00:49:07.996" endtime="20211122 00:49:08.001"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ws}</var>
+<arg>${wb.get_sheet_by_name('XPATH_SSC')}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.002" level="INFO">${ws} = &lt;Worksheet "XPATH_SSC"&gt;</msg>
+<status status="PASS" starttime="20211122 00:49:08.001" endtime="20211122 00:49:08.002"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ClickSearch}</var>
+<arg>${ws.cell(1,1).value}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.003" level="INFO">${ClickSearch} = //input[@Class='_5vxBY _32CNv _2MLml']</msg>
+<status status="PASS" starttime="20211122 00:49:08.002" endtime="20211122 00:49:08.003"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ClickSearchProduct}</var>
+<arg>${ws.cell(2,1).value}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.003" level="INFO">${ClickSearchProduct} = //*[@id="btn-searchResultPage"]</msg>
+<status status="PASS" starttime="20211122 00:49:08.003" endtime="20211122 00:49:08.003"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Click_Clear_Value}</var>
+<arg>${ws.cell(3,1).value}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.004" level="INFO">${Click_Clear_Value} = //*[@id="app"]/div/div[1]/div/div[1]/div[1]/div[1]/input</msg>
+<status status="PASS" starttime="20211122 00:49:08.004" endtime="20211122 00:49:08.004"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Wait_Add_to_cart}</var>
+<arg>${ws.cell(4,1).value}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.005" level="INFO">${Wait_Add_to_cart} = //span[@Class='AddToCartButton__AddCartTxt-sc-1wy62u8-0 iGDIhN']</msg>
+<status status="PASS" starttime="20211122 00:49:08.005" endtime="20211122 00:49:08.005"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Clear_Text}</var>
+<arg>${ws.cell(5,1).value}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.006" level="INFO">${Clear_Text} = //*[@id="app"]/div/div[1]/div/div[1]/div[1]/div[1]/input</msg>
+<status status="PASS" starttime="20211122 00:49:08.005" endtime="20211122 00:49:08.006"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${ClickSearch}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:08.007" level="INFO">${ClickSearch} = //input[@Class='_5vxBY _32CNv _2MLml']</msg>
+<status status="PASS" starttime="20211122 00:49:08.006" endtime="20211122 00:49:08.007"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${ClickSearchProduct}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:08.007" level="INFO">${ClickSearchProduct} = //*[@id="btn-searchResultPage"]</msg>
+<status status="PASS" starttime="20211122 00:49:08.007" endtime="20211122 00:49:08.007"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Click_Clear_Value}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:08.008" level="INFO">${Click_Clear_Value} = //*[@id="app"]/div/div[1]/div/div[1]/div[1]/div[1]/input</msg>
+<status status="PASS" starttime="20211122 00:49:08.007" endtime="20211122 00:49:08.008"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Wait_Add_to_cart}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:08.008" level="INFO">${Wait_Add_to_cart} = //span[@Class='AddToCartButton__AddCartTxt-sc-1wy62u8-0 iGDIhN']</msg>
+<status status="PASS" starttime="20211122 00:49:08.008" endtime="20211122 00:49:08.008"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Clear_Text}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:08.009" level="INFO">${Clear_Text} = //*[@id="app"]/div/div[1]/div/div[1]/div[1]/div[1]/input</msg>
+<status status="PASS" starttime="20211122 00:49:08.009" endtime="20211122 00:49:08.009"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:07.995" endtime="20211122 00:49:08.009"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>get_product</arg>
+<arg>${host}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20211122 00:49:08.010" level="INFO">Creating Session using : alias=get_product, url=https://www.officemate.co.th/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20211122 00:49:08.010" endtime="20211122 00:49:08.010"/>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>get_product</arg>
+<arg>${apitest}</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<msg timestamp="20211122 00:49:08.011" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg timestamp="20211122 00:49:08.129" level="INFO">GET Request : url=https://www.officemate.co.th/api/childrenCategories/en/2104,2171,2202,2213,2217,4861,4862,956,964,968,976,991,995 
+ path_url=/api/childrenCategories/en/2104,2171,2202,2213,2217,4861,4862,956,964,968,976,991,995 
+ headers={'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20211122 00:49:08.129" level="INFO">GET Response : url=https://www.officemate.co.th/api/childrenCategories/en/2104,2171,2202,2213,2217,4861,4862,956,964,968,976,991,995 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json; charset=utf-8', 'X-Powered-By': 'Express', 'x-frame-options': 'SAMEORIGIN', 'x-xss-protection': '1; mode=block', 'Cache-Control': 'public, max-age=3600', 'ETag': 'W/"d1cd-HB7hVF7uYd79hxdTPCtOhiexzmw"', 'Content-Encoding': 'gzip', 'Content-Length': '5170', 'Date': 'Sun, 21 Nov 2021 17:49:09 GMT', 'Connection': 'keep-alive', 'Vary': 'Accept-Encoding', 'Server-Timing': 'cdn-cache; desc=MISS, edge; dur=37, origin; dur=9'} 
+ body={"category":[{"id":956,"parent_id":955,"name":"Office Furniture","is_active":true,"position":1,"level":3,"children":"3201,957,958,959,960,961,962,963","path":"1/2/955/956","include_in_menu":true,"image":"","children_count":"8","url_key":"office-furniture","url_path":"furniture/office-furniture","is_popular":"0","icon_square":"956-t.jpg","seo_bottom_content":"&lt;h1&gt;Office Furniture&lt;/h1&gt;","meta_title":"Office Furniture | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":3457,"children_data":[{"id":957,"parent_id":956,"name":"Chair","is_active":true,"position":1,"level":4,"children":"","path":"1/2/955/956/957","include_in_menu":true,"image":"","children_count":"0","url_key":"chair","url_path":"furniture/office-furniture/chair","is_popular":"0","icon_square":"957-t.jpg","seo_bottom_content":"&lt;h1&gt;Chair&lt;/h1&gt;","meta_title":"Chair | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":1016,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":959,"parent_id":956,"name":"Cabinet","is_active":true,"position":2,"level":4,"children":"","path":"1/2/955/956/959","include_in_menu":true,"image":"","children_count":"0","url_key":"cabinet","url_path":"furniture/office-furniture/cabinet","is_popular":"0","icon_square":"959-t.jpg","seo_bottom_content":"&lt;h1&gt;Cabinet&lt;/h1&gt;","meta_title":"Cabinet | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":707,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":958,"parent_id":956,"name":"Table","is_active":true,"position":3,"level":4,"children":"","path":"1/2/955/956/958","include_in_menu":true,"image":"","children_count":"0","url_key":"table","url_path":"furniture/office-furniture/table","is_popular":"0","icon_square":"958-t.jpg","seo_bottom_content":"&lt;h1&gt;Table&lt;/h1&gt;","meta_title":"Table | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":1042,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":961,"parent_id":956,"name":"Partition","is_active":true,"position":4,"level":4,"children":"","path":"1/2/955/956/961","include_in_menu":true,"image":"","children_count":"0","url_key":"partition","url_path":"furniture/office-furniture/partition","is_popular":"0","icon_square":"961-t.jpg","seo_bottom_content":"&lt;h1&gt;Partition&lt;/h1&gt;","meta_title":"Partition | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":103,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":962,"parent_id":956,"name":"Security Storage","is_active":true,"position":5,"level":4,"children":"","path":"1/2/955/956/962","include_in_menu":true,"image":"","children_count":"0","url_key":"security-storage","url_path":"furniture/office-furniture/security-storage","is_popular":"0","icon_square":"962-t.jpg","seo_bottom_content":"&lt;h1&gt;Security Storage&lt;/h1&gt;","meta_title":"Security Storage | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":100,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":963,"parent_id":956,"name":"Furniture Accessory","is_active":true,"position":6,"level":4,"children":"","path":"1/2/955/956/963","include_in_menu":true,"image":"","children_count":"0","url_key":"accessory","url_path":"furniture/office-furniture/accessory","is_popular":"0","icon_square":"963-t.jpg","seo_bottom_content":"&lt;h1&gt;Furniture Accessory&lt;/h1&gt;","meta_title":"Furniture Accessory | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":240,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":960,"parent_id":956,"name":"Sofa","is_active":true,"position":7,"level":4,"children":"","path":"1/2/955/956/960","include_in_menu":true,"image":"","children_count":"0","url_key":"sofa","url_path":"furniture/office-furniture/sofa","is_popular":"0","icon_square":"960-t.jpg","seo_bottom_content":"&lt;h1&gt;Sofa&lt;/h1&gt;","meta_title":"Sofa | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":47,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":3201,"parent_id":956,"name":"Pillow","is_active":true,"position":8,"level":4,"children":"","path":"1/2/955/956/3201","include_in_menu":true,"image":"","children_count":"0","url_key":"pillow","url_path":"furniture/office-furniture/pillow","is_popular":"0","icon_square":"3201-t.jpg","seo_bottom_content":"&lt;h1&gt;Pillow&lt;/h1&gt;","meta_title":"Pillow | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":115,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]}],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[{"id":17,"name":"Furradec","logo":"Logo-Furradec.png"},{"id":242,"name":"Apex","logo":"Logo-Apex.png"},{"id":279,"name":"MONO","logo":"Logo_Mono_1.png"},{"id":889,"name":"STB","logo":"Logo-STB.png"},{"id":991,"name":"ERGOTREND","logo":"Logo-Ergotrend.png"},{"id":1001,"name":"Serta","logo":"Logo-Serta.png"}]},{"id":991,"parent_id":955,"name":"Decoration","is_active":true,"position":2,"level":3,"children":"1246,1249,1251,1256,1259,2235,3300,3301,992,993,994","path":"1/2/955/991","include_in_menu":true,"image":"","children_count":"11","url_key":"decoration","url_path":"furniture/decoration","is_popular":"0","icon_square":"991-t.jpg","seo_bottom_content":"&lt;h1&gt;Decoration&lt;/h1&gt;","meta_title":"Decoration | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":4092,"children_data":[{"id":1249,"parent_id":991,"name":"flag","is_active":true,"position":1,"level":4,"children":"","path":"1/2/955/991/1249","include_in_menu":true,"image":"","children_count":"0","url_key":"flag","url_path":"furniture/decoration/flag","is_popular":"0","icon_square":"1249-t.jpg","seo_bottom_content":"&lt;h1&gt;flag&lt;/h1&gt;","meta_title":"flag | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":29,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":1251,"parent_id":991,"name":"Key Tag &amp; Magnet Hook","is_active":true,"position":2,"level":4,"children":"","path":"1/2/955/991/1251","include_in_menu":true,"image":"","children_count":"0","url_key":"key-tag-card-ring-magnet-hook","url_path":"furniture/decoration/key-tag-card-ring-magnet-hook","is_popular":"0","icon_square":"1251-t.jpg","seo_bottom_content":"&lt;h1&gt;Key Tag &amp; Magnet Hook&lt;/h1&gt;","meta_title":"Key Tag &amp; Magnet Hook | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":283,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":2235,"parent_id":991,"name":"The Other Decoration","is_active":true,"position":3,"level":4,"children":"","path":"1/2/955/991/2235","include_in_menu":true,"image":"","children_count":"0","url_key":"the-other-decoration","url_path":"furniture/decoration/the-other-decoration","is_popular":"0","icon_square":"60289875.jpg","seo_bottom_content":"&lt;h1&gt;The Other Decoration&lt;/h1&gt;","meta_title":"The Other Decoration | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":3200,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":994,"parent_id":991,"name":"Clock","is_active":true,"position":4,"level":4,"children":"","path":"1/2/955/991/994","include_in_menu":true,"image":"","children_count":"0","url_key":"clock","url_path":"furniture/decoration/clock","is_popular":"0","icon_square":"994-t.jpg","seo_bottom_content":"&lt;h1&gt;Clock&lt;/h1&gt;","meta_title":"Clock | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":264,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":993,"parent_id":991,"name":"Furniture Protection Pad","is_active":true,"position":5,"level":4,"children":"","path":"1/2/955/991/993","include_in_menu":true,"image":"","children_count":"0","url_key":"furniture-protection-pad","url_path":"furniture/decoration/furniture-protection-pad","is_popular":"0","icon_square":"993-t.jpg","seo_bottom_content":"&lt;h1&gt;Furniture Protection Pad &lt;/h1&gt;","meta_title":"Furniture Protection Pad | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":156,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":1246,"parent_id":991,"name":"Mail Box","is_active":true,"position":6,"level":4,"children":"","path":"1/2/955/991/1246","include_in_menu":true,"image":"","children_count":"0","url_key":"mail-box","url_path":"furniture/decoration/mail-box","is_popular":"0","icon_square":"1246-t.jpg","seo_bottom_content":"&lt;h1&gt;Mail Box&lt;/h1&gt;","meta_title":"Mail Box | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":41,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","brands":[]},{"id":3300,"parent_id":991,"name":"Wallpaper","is_active":true,"position":7,"level":4,"children":"","path":"1/2/955/991/3300","include_in_menu":true,"image":"","children_count":"0","url_key":"wallpaper","url_path":"furniture/decoration/wallpaper","is_popular":"0","icon_square":"","seo_bottom_content":"&lt;h1&gt;Wallpaper&lt;/h1&gt;","meta_title":"Wallpaper | OfficeMate","meta_keywords":"","meta_description":"","description":"","product_count":9,"children_data":[],"promotion_condition":"","sort_direction":"desc","sort_field":"percent_discount","br... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20211122 00:49:08.130" level="INFO">c:\users\shado\appdata\local\programs\python\python39\lib\site-packages\urllib3\connectionpool.py:981: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.officemate.co.th'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20211122 00:49:08.131" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20211122 00:49:08.010" endtime="20211122 00:49:08.131"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${statusCode}</var>
+<arg>${resp.status_code}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.133" level="INFO">${statusCode} = 200</msg>
+<status status="PASS" starttime="20211122 00:49:08.132" endtime="20211122 00:49:08.133"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${valueJson}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.136" level="INFO">${valueJson} = {'category': [{'id': 956, 'parent_id': 955, 'name': 'Office Furniture', 'is_active': True, 'position': 1, 'level': 3, 'children': '3201,957,958,959,960,961,962,963', 'path': '1/2/955/956', 'include_in...</msg>
+<status status="PASS" starttime="20211122 00:49:08.134" endtime="20211122 00:49:08.136"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${valueJson}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211122 00:49:08.136" endtime="20211122 00:49:08.192"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${statusCode}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211122 00:49:08.192" endtime="20211122 00:49:08.193"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:07.994" endtime="20211122 00:49:08.194"/>
+</test>
+<test id="s1-t2" name="2.Automated UI officeMate">
+<kw name="OPEN EXCEL XPATH" library="Keywords" type="SETUP">
+<kw name="Load Workbook" library="openpyxl">
+<var>${wb}</var>
+<arg>${excelXPATH}</arg>
+<doc>Open the given filename and return the workbook</doc>
+<msg timestamp="20211122 00:49:08.205" level="INFO">${wb} = &lt;openpyxl.workbook.workbook.Workbook object at 0x000001F5D94F06D0&gt;</msg>
+<status status="PASS" starttime="20211122 00:49:08.197" endtime="20211122 00:49:08.205"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ws}</var>
+<arg>${wb.get_sheet_by_name('XPATH_SSC')}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.207" level="INFO">${ws} = &lt;Worksheet "XPATH_SSC"&gt;</msg>
+<status status="PASS" starttime="20211122 00:49:08.205" endtime="20211122 00:49:08.207"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ClickSearch}</var>
+<arg>${ws.cell(1,1).value}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.208" level="INFO">${ClickSearch} = //input[@Class='_5vxBY _32CNv _2MLml']</msg>
+<status status="PASS" starttime="20211122 00:49:08.207" endtime="20211122 00:49:08.209"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${ClickSearchProduct}</var>
+<arg>${ws.cell(2,1).value}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.210" level="INFO">${ClickSearchProduct} = //*[@id="btn-searchResultPage"]</msg>
+<status status="PASS" starttime="20211122 00:49:08.209" endtime="20211122 00:49:08.210"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Click_Clear_Value}</var>
+<arg>${ws.cell(3,1).value}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.213" level="INFO">${Click_Clear_Value} = //*[@id="app"]/div/div[1]/div/div[1]/div[1]/div[1]/input</msg>
+<status status="PASS" starttime="20211122 00:49:08.211" endtime="20211122 00:49:08.213"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Wait_Add_to_cart}</var>
+<arg>${ws.cell(4,1).value}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.214" level="INFO">${Wait_Add_to_cart} = //span[@Class='AddToCartButton__AddCartTxt-sc-1wy62u8-0 iGDIhN']</msg>
+<status status="PASS" starttime="20211122 00:49:08.213" endtime="20211122 00:49:08.214"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${Clear_Text}</var>
+<arg>${ws.cell(5,1).value}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211122 00:49:08.215" level="INFO">${Clear_Text} = //*[@id="app"]/div/div[1]/div/div[1]/div[1]/div[1]/input</msg>
+<status status="PASS" starttime="20211122 00:49:08.214" endtime="20211122 00:49:08.215"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${ClickSearch}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:08.215" level="INFO">${ClickSearch} = //input[@Class='_5vxBY _32CNv _2MLml']</msg>
+<status status="PASS" starttime="20211122 00:49:08.215" endtime="20211122 00:49:08.215"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${ClickSearchProduct}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:08.216" level="INFO">${ClickSearchProduct} = //*[@id="btn-searchResultPage"]</msg>
+<status status="PASS" starttime="20211122 00:49:08.216" endtime="20211122 00:49:08.216"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Click_Clear_Value}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:08.217" level="INFO">${Click_Clear_Value} = //*[@id="app"]/div/div[1]/div/div[1]/div[1]/div[1]/input</msg>
+<status status="PASS" starttime="20211122 00:49:08.216" endtime="20211122 00:49:08.217"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Wait_Add_to_cart}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:08.217" level="INFO">${Wait_Add_to_cart} = //span[@Class='AddToCartButton__AddCartTxt-sc-1wy62u8-0 iGDIhN']</msg>
+<status status="PASS" starttime="20211122 00:49:08.217" endtime="20211122 00:49:08.217"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Clear_Text}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:08.218" level="INFO">${Clear_Text} = //*[@id="app"]/div/div[1]/div/div[1]/div[1]/div[1]/input</msg>
+<status status="PASS" starttime="20211122 00:49:08.217" endtime="20211122 00:49:08.218"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:08.196" endtime="20211122 00:49:08.218"/>
+</kw>
+<kw name="RUNSEARCH_PRODUCT" library="Keywords">
+<kw name="OPEN WEB SITE" library="Keywords">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${url}</arg>
+<arg>${Browser}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20211122 00:49:08.219" level="INFO">Opening browser 'chrome' to base url 'https://www.officemate.co.th/en'.</msg>
+<status status="PASS" starttime="20211122 00:49:08.219" endtime="20211122 00:49:18.342"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:08.218" endtime="20211122 00:49:18.342"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20211122 00:49:18.342" endtime="20211122 00:49:18.718"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${TEST_DATA}</var>
+<arg>${COLUMN_DATA_EXCEL}[1]</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20211122 00:49:18.719" level="INFO">${TEST_DATA} = C:\superapi-robot copy\test\officeMate\Data\search.xlsx</msg>
+<status status="PASS" starttime="20211122 00:49:18.718" endtime="20211122 00:49:18.719"/>
+</kw>
+<kw name="Open Excel Document" library="ExcelLibrary">
+<arg>filename=${TEST_DATA}</arg>
+<arg>doc_id=INPUT</arg>
+<doc>Opens xlsx document file.</doc>
+<status status="PASS" starttime="20211122 00:49:18.719" endtime="20211122 00:49:18.730"/>
+</kw>
+<kw name="Count Row" library="ExcelLibrary">
+<var>${excelRow}</var>
+<arg>INPUT</arg>
+<msg timestamp="20211122 00:49:18.731" level="INFO">${excelRow} = 4</msg>
+<status status="PASS" starttime="20211122 00:49:18.730" endtime="20211122 00:49:18.731"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${ClickSearch}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211122 00:49:18.731" endtime="20211122 00:49:18.994"/>
+</kw>
+<kw name="CLICK_SEARCH" library="Keywords">
+<arg>${ClickSearch}</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=${XPATH}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20211122 00:49:18.995" level="INFO">Clicking element 'xpath=//input[@Class='_5vxBY _32CNv _2MLml']'.</msg>
+<status status="PASS" starttime="20211122 00:49:18.995" endtime="20211122 00:49:19.086"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:18.994" endtime="20211122 00:49:19.086"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${Indexrow}</var>
+<value>2</value>
+<value>${excelRow}+1</value>
+<iter>
+<var name="${Indexrow}">2</var>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${DATAINPUT}</var>
+<arg>row_num=${Indexrow}</arg>
+<arg>sheet_name=INPUT</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20211122 00:49:19.088" level="INFO">${DATAINPUT} = ['MKP0851536']</msg>
+<status status="PASS" starttime="20211122 00:49:19.087" endtime="20211122 00:49:19.088"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Indexrow}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:19.089" level="INFO">${Indexrow} = 2</msg>
+<status status="PASS" starttime="20211122 00:49:19.088" endtime="20211122 00:49:19.089"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${DATAINPUT}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:19.090" level="INFO">${DATAINPUT} = ['MKP0851536']</msg>
+<status status="PASS" starttime="20211122 00:49:19.089" endtime="20211122 00:49:19.090"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${DATAINPUT}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211122 00:49:19.090" endtime="20211122 00:49:19.090"/>
+</kw>
+<kw name="INPUT SEARCH PRODUCT" library="Keywords">
+<arg>${ClickSearch}</arg>
+<arg>${DATAINPUT}</arg>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${DATA_USER}[0]</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211122 00:49:19.091" endtime="20211122 00:49:19.092"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath=${XPATH}</arg>
+<arg>${DATA_USER}[0]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20211122 00:49:19.092" level="INFO">Typing text 'MKP0851536' into text field 'xpath=//input[@Class='_5vxBY _32CNv _2MLml']'.</msg>
+<status status="PASS" starttime="20211122 00:49:19.092" endtime="20211122 00:49:19.200"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:19.091" endtime="20211122 00:49:19.200"/>
+</kw>
+<kw name="SEARCH PRODUCT" library="Keywords">
+<arg>${ClickSearchProduct}</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=${XPATH}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20211122 00:49:19.201" level="INFO">Clicking element 'xpath=//*[@id="btn-searchResultPage"]'.</msg>
+<status status="PASS" starttime="20211122 00:49:19.201" endtime="20211122 00:49:19.338"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:19.200" endtime="20211122 00:49:19.338"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${Wait_Add_to_cart}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211122 00:49:19.338" endtime="20211122 00:49:19.393"/>
+</kw>
+<kw name="CLICK_SEARCH" library="Keywords">
+<arg>${Click_Clear_Value}</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=${XPATH}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20211122 00:49:19.394" level="INFO">Clicking element 'xpath=//*[@id="app"]/div/div[1]/div/div[1]/div[1]/div[1]/input'.</msg>
+<status status="PASS" starttime="20211122 00:49:19.394" endtime="20211122 00:49:19.459"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:19.393" endtime="20211122 00:49:19.459"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2.5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20211122 00:49:21.969" level="INFO">Slept 2 seconds 500 milliseconds</msg>
+<status status="PASS" starttime="20211122 00:49:19.459" endtime="20211122 00:49:21.970"/>
+</kw>
+<kw name="Clear Element Text" library="SeleniumLibrary">
+<arg>${Clear_Text}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" starttime="20211122 00:49:21.970" endtime="20211122 00:49:22.081"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:19.087" endtime="20211122 00:49:22.081"/>
+</iter>
+<iter>
+<var name="${Indexrow}">3</var>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${DATAINPUT}</var>
+<arg>row_num=${Indexrow}</arg>
+<arg>sheet_name=INPUT</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20211122 00:49:22.082" level="INFO">${DATAINPUT} = ['OFM1031411']</msg>
+<status status="PASS" starttime="20211122 00:49:22.082" endtime="20211122 00:49:22.082"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Indexrow}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:22.083" level="INFO">${Indexrow} = 3</msg>
+<status status="PASS" starttime="20211122 00:49:22.083" endtime="20211122 00:49:22.083"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${DATAINPUT}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:22.083" level="INFO">${DATAINPUT} = ['OFM1031411']</msg>
+<status status="PASS" starttime="20211122 00:49:22.083" endtime="20211122 00:49:22.083"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${DATAINPUT}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211122 00:49:22.084" endtime="20211122 00:49:22.084"/>
+</kw>
+<kw name="INPUT SEARCH PRODUCT" library="Keywords">
+<arg>${ClickSearch}</arg>
+<arg>${DATAINPUT}</arg>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${DATA_USER}[0]</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211122 00:49:22.085" endtime="20211122 00:49:22.085"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath=${XPATH}</arg>
+<arg>${DATA_USER}[0]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20211122 00:49:22.086" level="INFO">Typing text 'OFM1031411' into text field 'xpath=//input[@Class='_5vxBY _32CNv _2MLml']'.</msg>
+<status status="PASS" starttime="20211122 00:49:22.086" endtime="20211122 00:49:22.165"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:22.084" endtime="20211122 00:49:22.165"/>
+</kw>
+<kw name="SEARCH PRODUCT" library="Keywords">
+<arg>${ClickSearchProduct}</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=${XPATH}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20211122 00:49:22.166" level="INFO">Clicking element 'xpath=//*[@id="btn-searchResultPage"]'.</msg>
+<status status="PASS" starttime="20211122 00:49:22.166" endtime="20211122 00:49:22.399"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:22.165" endtime="20211122 00:49:22.399"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${Wait_Add_to_cart}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211122 00:49:22.399" endtime="20211122 00:49:22.417"/>
+</kw>
+<kw name="CLICK_SEARCH" library="Keywords">
+<arg>${Click_Clear_Value}</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=${XPATH}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20211122 00:49:22.418" level="INFO">Clicking element 'xpath=//*[@id="app"]/div/div[1]/div/div[1]/div[1]/div[1]/input'.</msg>
+<status status="PASS" starttime="20211122 00:49:22.418" endtime="20211122 00:49:22.582"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:22.417" endtime="20211122 00:49:22.582"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2.5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20211122 00:49:25.095" level="INFO">Slept 2 seconds 500 milliseconds</msg>
+<status status="PASS" starttime="20211122 00:49:22.582" endtime="20211122 00:49:25.095"/>
+</kw>
+<kw name="Clear Element Text" library="SeleniumLibrary">
+<arg>${Clear_Text}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" starttime="20211122 00:49:25.096" endtime="20211122 00:49:25.171"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:22.081" endtime="20211122 00:49:25.172"/>
+</iter>
+<iter>
+<var name="${Indexrow}">4</var>
+<kw name="Read Excel Row" library="ExcelLibrary">
+<var>${DATAINPUT}</var>
+<arg>row_num=${Indexrow}</arg>
+<arg>sheet_name=INPUT</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<msg timestamp="20211122 00:49:25.173" level="INFO">${DATAINPUT} = ['OFM1008512']</msg>
+<status status="PASS" starttime="20211122 00:49:25.172" endtime="20211122 00:49:25.174"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${Indexrow}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:25.175" level="INFO">${Indexrow} = 4</msg>
+<status status="PASS" starttime="20211122 00:49:25.174" endtime="20211122 00:49:25.175"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${DATAINPUT}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20211122 00:49:25.176" level="INFO">${DATAINPUT} = ['OFM1008512']</msg>
+<status status="PASS" starttime="20211122 00:49:25.175" endtime="20211122 00:49:25.176"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${DATAINPUT}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211122 00:49:25.176" endtime="20211122 00:49:25.178"/>
+</kw>
+<kw name="INPUT SEARCH PRODUCT" library="Keywords">
+<arg>${ClickSearch}</arg>
+<arg>${DATAINPUT}</arg>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${DATA_USER}[0]</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211122 00:49:25.179" endtime="20211122 00:49:25.180"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>xpath=${XPATH}</arg>
+<arg>${DATA_USER}[0]</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20211122 00:49:25.182" level="INFO">Typing text 'OFM1008512' into text field 'xpath=//input[@Class='_5vxBY _32CNv _2MLml']'.</msg>
+<status status="PASS" starttime="20211122 00:49:25.181" endtime="20211122 00:49:25.295"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:25.178" endtime="20211122 00:49:25.295"/>
+</kw>
+<kw name="SEARCH PRODUCT" library="Keywords">
+<arg>${ClickSearchProduct}</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=${XPATH}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20211122 00:49:25.297" level="INFO">Clicking element 'xpath=//*[@id="btn-searchResultPage"]'.</msg>
+<status status="PASS" starttime="20211122 00:49:25.296" endtime="20211122 00:49:25.528"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:25.296" endtime="20211122 00:49:25.528"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${Wait_Add_to_cart}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211122 00:49:25.528" endtime="20211122 00:49:25.547"/>
+</kw>
+<kw name="CLICK_SEARCH" library="Keywords">
+<arg>${Click_Clear_Value}</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>xpath=${XPATH}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20211122 00:49:25.548" level="INFO">Clicking element 'xpath=//*[@id="app"]/div/div[1]/div/div[1]/div[1]/div[1]/input'.</msg>
+<status status="PASS" starttime="20211122 00:49:25.547" endtime="20211122 00:49:25.582"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:25.547" endtime="20211122 00:49:25.583"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2.5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20211122 00:49:28.087" level="INFO">Slept 2 seconds 500 milliseconds</msg>
+<status status="PASS" starttime="20211122 00:49:25.583" endtime="20211122 00:49:28.087"/>
+</kw>
+<kw name="Clear Element Text" library="SeleniumLibrary">
+<arg>${Clear_Text}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="PASS" starttime="20211122 00:49:28.087" endtime="20211122 00:49:28.117"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:25.172" endtime="20211122 00:49:28.117"/>
+</iter>
+<status status="PASS" starttime="20211122 00:49:19.086" endtime="20211122 00:49:28.117"/>
+</for>
+<status status="PASS" starttime="20211122 00:49:08.218" endtime="20211122 00:49:28.117"/>
+</kw>
+<status status="PASS" starttime="20211122 00:49:08.195" endtime="20211122 00:49:28.118"/>
+</test>
+<status status="PASS" starttime="20211122 00:49:07.121" endtime="20211122 00:49:28.120"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="Officemate">Officemate</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20211122 00:49:08.011" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+</errors>
+</robot>
